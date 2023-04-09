@@ -4,8 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "node index.js",
-		"dev": "nodemon index.js"
+		"start": "node index.js"
 	},
 	"keywords": [],
 	"author": "",
@@ -14,8 +13,5 @@
 		"console.table": "^0.10.0",
 		"inquirer": "^8.2.4",
 		"mysql2": "^3.2.0"
-	},
-	"devDependencies": {
-		"nodemon": "^2.0.22"
 	}
 }
