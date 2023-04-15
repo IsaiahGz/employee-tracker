@@ -1,6 +1,6 @@
 require('dotenv').config();
-const { starterOptions, startPrompt, addDeptPrompt } = require('./lib/prompt');
-const { closeDb, displayDepartments, displayRoles, displayEmployees, addDepartment } = require('./lib/db');
+const { starterOptions, startPrompt, addDeptPrompt, addRolePrompt } = require('./lib/prompt');
+const { closeDb, displayDepartments, displayRoles, displayEmployees, addDepartment, addRole } = require('./lib/db');
 
 const init = async () => {
 	let shouldContinue = true;
@@ -21,6 +21,10 @@ const init = async () => {
 			case starterOptions.addDepartment:
 				const { department } = await addDeptPrompt();
 				await addDepartment(department);
+				break;
+			case starterOptions.addRole:
+				const roleInfo = await addRolePrompt();
+				await addRole(roleInfo);
 				break;
 			case starterOptions.quit:
 				shouldContinue = false;
