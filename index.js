@@ -1,5 +1,13 @@
 require('dotenv').config();
-const { starterOptions, startPrompt, addDeptPrompt, addRolePrompt, addEmployeePrompt, updateEmployeeRolePrompt } = require('./lib/prompt');
+const {
+	starterOptions,
+	startPrompt,
+	addDeptPrompt,
+	addRolePrompt,
+	addEmployeePrompt,
+	updateEmployeeRolePrompt,
+	updateEmployeeManagerPrompt,
+} = require('./lib/prompt');
 const {
 	closeDb,
 	displayDepartments,
@@ -9,6 +17,7 @@ const {
 	addRole,
 	addEmployee,
 	updateEmployeeRole,
+	updateEmployeeManager,
 } = require('./lib/db');
 
 const init = async () => {
@@ -42,6 +51,13 @@ const init = async () => {
 			case starterOptions.updateEmployeeRole:
 				const employeeRoleInfo = await updateEmployeeRolePrompt();
 				await updateEmployeeRole(employeeRoleInfo);
+				break;
+			case starterOptions.updateEmployeeManager:
+				const { employeeId, managerId } = await updateEmployeeManagerPrompt();
+				if (employeeId === managerId) console.log(`Employee can't be their own manager`);
+				else {
+					await updateEmployeeManager({ employeeId, managerId });
+				}
 				break;
 			case starterOptions.quit:
 				shouldContinue = false;
